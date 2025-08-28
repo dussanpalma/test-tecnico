@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-      REGION: ${{ secrets.GCP_REGION }}            # Ej: us-central1
+      REGION: ${{ secrets.GCP_REGION }}
       SERVICE_NAME: farmatodo
       IMAGE: ${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/farmatodo-repo/farmatodo:latest
       API_KEY_BASE64: ${{ secrets.API_KEY_BASE64 }}
@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           distribution: temurin
@@ -30,9 +30,7 @@ jobs:
           echo "${{ secrets.GCP_SA_KEY }}" > key.json
           gcloud auth activate-service-account --key-file=key.json
           gcloud config set project $PROJECT_ID
-
-      - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev
+          gcloud auth configure-docker $REGION-docker.pkg.dev
 
       - name: Build Maven project
         run: mvn clean package -DskipTests
@@ -40,10 +38,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t $IMAGE .
 
-      - name: Verify Docker image
-        run: docker images | grep farmatodo
-
-      - name: Push Docker image to Artifact Registry
+      - name: Push to Artifact Registry
         run: docker push $IMAGE
 
       - name: Deploy to Cloud Run
