@@ -6,7 +6,6 @@ import java.util.List;
 
 @Data
 public class CartCheckoutDTO {
-
     @NotNull
     private Long customerId;
 
