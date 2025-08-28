@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  farmatodo:
+    build: .
+    container_name: farmatodo_app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:testdb
+      - SPRING_DATASOURCE_USERNAME=fmtest
+      - SPRING_DATASOURCE_PASSWORD=fmtest
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+      - SPRING_MAIL_HOST=smtp.gmail.com
+      - SPRING_MAIL_PORT=587
+      - SPRING_MAIL_USERNAME=pruebafarmatodo8@gmail.com
+      - SPRING_MAIL_PASSWORD=123456789farmatodo
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=true
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true
+    restart: unless-stopped
