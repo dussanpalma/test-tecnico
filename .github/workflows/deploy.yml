@@ -36,9 +36,9 @@ jobs:
           service_account_key: google-credentials.json
           export_default_credentials: true
 
-      - name: Authenticate gcloud & Docker
+      - name: Authenticate Docker for Artifact Registry
         run: |
-          gcloud auth login --brief --cred-file=google-credentials.json --update-adc
+          gcloud auth activate-service-account --key-file=google-credentials.json
           gcloud auth configure-docker --quiet
 
       - name: Build Maven project
