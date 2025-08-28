@@ -25,17 +25,20 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Write service account key to file
+        run: |
+          echo '${{ secrets.GCP_SA_KEY }}' > google-credentials.json
+
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          service_account_key: google-credentials.json
           export_default_credentials: true
 
       - name: Authenticate gcloud & Docker
         run: |
-          echo "$GCP_SA_KEY" > ./google-credentials.json
-          gcloud auth login --brief --cred-file=./google-credentials.json --update-adc
+          gcloud auth login --brief --cred-file=google-credentials.json --update-adc
           gcloud auth configure-docker --quiet
 
       - name: Build Maven project
