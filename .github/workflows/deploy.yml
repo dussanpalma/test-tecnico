@@ -32,10 +32,11 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-      - name: Authenticate Docker with Artifact Registry
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - name: Authenticate gcloud & Docker
+        run: |
+          echo "$GCP_SA_KEY" > ./google-credentials.json
+          gcloud auth login --brief --cred-file=./google-credentials.json --update-adc
+          gcloud auth configure-docker --quiet
 
       - name: Build Maven project
         run: mvn clean package -DskipTests
