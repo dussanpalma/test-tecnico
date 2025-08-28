@@ -1,6 +1,8 @@
 #OpenJDK 17
 FROM eclipse-temurin:17-jdk-alpine
 
+VOLUME /tmp
+
 # Directorio de trabajo en el contenedor
 WORKDIR /app
 
