@@ -36,10 +36,13 @@ jobs:
           service_account_key: google-credentials.json
           export_default_credentials: true
 
-      - name: Authenticate Docker for Artifact Registry
+      - name: Authenticate Docker for Artifact Registry via OAuth token
         run: |
+          # Activar service account
           gcloud auth activate-service-account --key-file=google-credentials.json
-          gcloud auth configure-docker --quiet
+          
+          # Obtener token temporal y loguear Docker
+          gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://${{ secrets.GCP_REGION }}-docker.pkg.dev
 
       - name: Build Maven project
         run: mvn clean package -DskipTests
