@@ -9,6 +9,7 @@ public class CartCheckoutDTO {
     @NotNull
     private Long customerId;
 
+
     @NotNull
     private String address;
 
