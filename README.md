@@ -7,6 +7,8 @@
 
 Farmatodo API es un sistema de gestión de clientes, productos, carritos y pagos que simula operaciones de e-commerce con tarjetas de crédito tokenizadas. Incluye endpoints seguros, logs centralizados, notificaciones por correo, y se despliega fácilmente usando Docker y Cloud Run.
 
+Repositorio público: [https://github.com/dussanpalma/test-tecnico](https://github.com/dussanpalma/test-tecnico)
+
 ---
 
 ## Requerimientos Funcionales
@@ -44,6 +46,7 @@ Farmatodo API es un sistema de gestión de clientes, productos, carritos y pagos
 
 ### 9. Despliegue
 - Despliegue mediante Docker y Docker Compose. ✅
+- Despliegue en Cloud Run: [https://farmatodo-yzsgxs2tya-uc.a.run.app](https://farmatodo-yzsgxs2tya-uc.a.run.app) ✅
 
 ---
 
@@ -77,12 +80,12 @@ Farmatodo API es un sistema de gestión de clientes, productos, carritos y pagos
 ## Información del Sistema
 
 ### Swagger UI
-- [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- [https://farmatodo-yzsgxs2tya-uc.a.run.app/swagger-ui.html](https://farmatodo-yzsgxs2tya-uc.a.run.app/swagger-ui.html)
 
 ### OpenAPI JSON
-- [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+- [https://farmatodo-yzsgxs2tya-uc.a.run.app/v3/api-docs](https://farmatodo-yzsgxs2tya-uc.a.run.app/v3/api-docs)
 
-### H2 Console
+### H2 Console (solo local)
 - URL: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
 - JDBC URL: `jdbc:h2:mem:testdb`
 - User: `fm`
